@@ -36,7 +36,7 @@ public class ProductsController : Controller
     }
 
     [HttpGet]
-    [Route("{id:Guid")]
+    [Route("{id:Guid}")]
     public async Task<IActionResult> GetProduct(Guid id)
     {
         var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
@@ -48,7 +48,7 @@ public class ProductsController : Controller
     }
 
     [HttpPut]
-    [Route("{id:Guid")]
+    [Route("{id:Guid}")]
     public async Task<IActionResult> UpdateProduct([FromRoute] Guid id, Product updateProductRequest)
     {
         var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
@@ -67,7 +67,7 @@ public class ProductsController : Controller
     }
 
     [HttpDelete]
-    [Route("{id:Guid")]
+    [Route("{id:Guid}")]
     public async Task<IActionResult> DeleteProduct(Guid id)
     {
         var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
