@@ -41,7 +41,7 @@ public class ProductsController : Controller
     {
         var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
 
-        if(product == null)
+        if (product == null)
             return NotFound();
 
         return Ok(product);
@@ -81,5 +81,5 @@ public class ProductsController : Controller
 
         return Ok(product);
     }
-
+   
 }
