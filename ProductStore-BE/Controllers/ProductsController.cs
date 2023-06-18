@@ -46,4 +46,23 @@ public class ProductsController : Controller
 
         return Ok(product);
     }
+
+    [HttpPut]
+    [Route("{id:Guid")]
+    public async Task<IActionResult> UpdateProduct([FromRoute] Guid id, Product updateProductRequest)
+    {
+        var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+
+        if (product == null)
+            return NotFound();
+
+        product.Color = updateProductRequest.Color;
+        product.Name = updateProductRequest.Name;
+        product.Price = updateProductRequest.Price;
+        product.Type = updateProductRequest.Type;
+
+        await _dbContext.SaveChangesAsync();
+
+        return Ok(product);
+    }
 }
