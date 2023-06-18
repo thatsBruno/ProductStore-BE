@@ -14,6 +14,7 @@ public class ProductsController : Controller
     {
         _dbContext = productStoreDbContext;
     }
+
     [HttpGet]
     public async Task<IActionResult> GetProducts()
     {
@@ -21,6 +22,7 @@ public class ProductsController : Controller
 
         return Ok(products);
     }
+
     [HttpPost]
     public async Task<IActionResult> AddProduct([FromBody] Product product)
     {
@@ -31,5 +33,17 @@ public class ProductsController : Controller
         await _dbContext.SaveChangesAsync();
 
         return Ok();
+    }
+
+    [HttpGet]
+    [Route("{id:Guid")]
+    public async Task<IActionResult> GetProduct(Guid id)
+    {
+        var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+
+        if(product == null)
+            return NotFound();
+
+        return Ok(product);
     }
 }
