@@ -65,4 +65,21 @@ public class ProductsController : Controller
 
         return Ok(product);
     }
+
+    [HttpDelete]
+    [Route("{id:Guid")]
+    public async Task<IActionResult> DeleteProduct(Guid id)
+    {
+        var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+
+        if (product == null)
+            return NotFound();
+
+        _dbContext.Remove(product);
+
+        await _dbContext.SaveChangesAsync();
+
+        return Ok(product);
+    }
+
 }
