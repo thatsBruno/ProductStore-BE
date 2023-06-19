@@ -39,7 +39,7 @@ public class ProductsController : Controller
     [Route("{id:Guid}")]
     public async Task<IActionResult> GetProduct(Guid id)
     {
-        var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+        var product = await _dbContext.Products.FirstOrDefaultAsync(id);
 
         if (product == null)
             return NotFound();
